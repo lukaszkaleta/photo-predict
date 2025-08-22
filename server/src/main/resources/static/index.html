@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentation Controller</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .presentation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .slide {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+        .slide.active {
+            display: block;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .slide-number {
+            text-align: center;
+            margin-top: 10px;
+            color: #666;
+        }
+        .workflow-section {
+            margin: 15px 0;
+            text-align: left;
+        }
+        .workflow-section h3 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .workflow-section ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .workflow-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .workflow-section li {
+            margin-bottom: 5px;
+        }
+        .back-button {
+            background-color: #6c757d;
+        }
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+        .overview-img {
+            width: 100%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .google-cloud-logo-img {
+            width: 40%;
+        }
+        .gemini-logo-img {
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide active">
+            <h1>Detectra AI (Issue Wizard)</h1>
+            <p>Detectra is a versatile, multimodal AI engine built to detect and interpret deviations across text, voice, and image data. It transforms unstructured information into clear deviation reports with precise, step-by-step resolution guidance—enabling faster decision-making and improved operational control.</p>
+            <p>While originally developed to support high-risk sectors like construction, Detectra is not limited to any single industry. Its flexibility lies in its ability to be trained on domain-specific material, allowing it to adapt seamlessly to manufacturing, logistics, healthcare, energy, and beyond.</p>
+            <p>With Detectra, any organization can turn raw inputs into structured insights—bridging the gap between human observation and AI-powered action.</p>
+            <h2>Powered by:</h2>
+            <img class="google-cloud-logo-img" src="/images/Google_Cloud_logo.svg.png" alt="google cloud logo">
+            <img class="gemini-logo-img" src="/images/Google_Gemini_logo.svg.png" alt="gemini logo">
+        </div>
+        <div class="slide">
+            <h2>How Detectra Works (Issue Wizard)</h2>
+            <div class="workflow-section">
+                <p>Detectra is a modular, multimodal AI engine that processes text, voice, and image inputs to detect, describe, and resolve deviations with precision. Its workflow includes the following key stages:</p>
+                <img class="overview-img" src="/images/overview.png" alt="overview image">
+                <h3>1. Input Ingestion</h3>
+                <p>Detectra accepts data from various formats—such as written logs, voice recordings, and images (e.g., photos from inspections or site documentation).</p>
+                <ul>
+                    <li>Voice is transcribed into text.</li>
+                    <li>Images are processed using Generative AI.</li>
+                    <li>All data is aligned and contextualized before analysis.</li>
+                </ul>
+
+                <h3>2. Deviation Detection & Classification</h3>
+                <p>Using advanced LLM models, Detectra scans the inputs to identify deviations such as:</p>
+                <ul>
+                    <li>Procedural errors</li>
+                    <li>Safety risks</li>
+                    <li>Equipment issues</li>
+                    <li>Non-compliance or anomalies</li>
+                </ul>
+                <p>Each deviation is automatically categorized by:</p>
+                <ul>
+                    <li>Issue Type (e.g., safety, technical, procedural)</li>
+                    <li>Priority Level (low, medium, high, critical)</li>
+                    <li>Estimated Repair Effort (in hours)</li>
+                </ul>
+
+                <h3>3. Solution Generation</h3>
+                <p>Detectra generates a detailed solution description for each deviation, including:</p>
+                <ul>
+                    <li>A summary of the issue in plain language</li>
+                    <li>The root cause (if detectable)</li>
+                    <li>Recommended resolution steps based on internal SOPs or regulatory guidelines</li>
+                    <li>A time estimate for resolving the issue</li>
+                </ul>
+
+                <h3>4. Interactive Fix Checklist</h3>
+                <p>To ensure accountability and ease of use, Detectra produces an interactive checklist that guides users step by step through the resolution process. This helps teams act on the findings immediately and ensures traceable corrective actions.</p>
+
+                <h3>5. Report Output & Integration</h3>
+                <p>All findings and recommendations are compiled into a structured deviation report.</p>
+
+                <p>Detectra's architecture is highly flexible—trained on domain-specific material, it adapts easily to various industries like construction, logistics, energy, healthcare, and more.</p>
+            </div>
+        </div>
+        <div class="controls">
+            <button onclick="previousSlide()" class="back-button">Back</button>
+            <button onclick="nextSlide()">Next</button>
+        </div>
+        <div class="slide-number">
+            Slide <span id="current-slide">1</span> of <span id="total-slides">2</span>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.getElementsByClassName('slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            // Hide all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            
+            // Show the current slide
+            slides[n].classList.add('active');
+            
+            // Update slide number
+            document.getElementById('current-slide').textContent = n + 1;
+
+            // Show/hide back button based on current slide
+            const backButton = document.querySelector('.back-button');
+            const nextButton = document.querySelector('button:not(.back-button)');
+            
+            if (n === 0) {
+                backButton.style.display = 'none';
+                nextButton.style.display = 'inline-block';
+            } else {
+                backButton.style.display = 'inline-block';
+                nextButton.style.display = 'none';
+            }
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // Initialize slide numbers
+        document.getElementById('total-slides').textContent = totalSlides;
+        // Initialize back button visibility
+        showSlide(currentSlide);
+    </script>
+</body>
+</html> 

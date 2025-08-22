@@ -1,0 +1,4 @@
+(java) generate method which send input stream to google cloud storage
+(java) add imports
+(pom.xml) add maven dependency to google cloud storage 
+(java) generate code which read all objects from google cloud storage bucket
